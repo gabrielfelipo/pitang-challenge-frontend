@@ -4,10 +4,9 @@ const { nextui } = require('@nextui-org/react')
 
 module.exports = {
   content: [
-    './node_modules/@nextui-org/theme/dist/*/.{js,ts,jsx,tsx}',
-    './node_modules/@nextui-org/theme/dist/components/(button|snippet|code|input).js',
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
+    './node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -16,5 +15,8 @@ module.exports = {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [nextui({
+    defaultTheme: 'light',
+    defaultExtendTheme: 'light',
+  })],
 }

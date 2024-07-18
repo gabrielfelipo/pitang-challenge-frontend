@@ -11,7 +11,7 @@ export const PageLayout = ({ children, className }: IPageLayout) => {
   return (
     <motion.div
       className={twMerge(
-        'relative flex min-h-screen w-full flex-col grow',
+        'relative flex min-h-max w-full flex-col grow',
         className
       )}
       initial={{ opacity: 0 }}

@@ -2,14 +2,17 @@ import { z } from 'zod'
 import validator from 'validator'
 import dayjs from 'dayjs'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 import { PageLayout } from '~/components/PageLayout'
-import { ZodForm } from '~/components/forms'
+import { useZodForm, ZodForm } from '~/components/forms'
 import { Button } from '~/components/Button'
+import { useDialog } from '~/components/Dialog'
 import { hours } from '~/constants'
-import { useRegisterSchedule } from './api/registerSchedule'
+import { useRegisterSchedule } from '../api/registerSchedule'
 
-export const scheduleCitizenExamSchema = z.object({
+
+export const schema = z.object({
   name: z
     .string()
     .trim()
@@ -39,31 +42,44 @@ export const scheduleCitizenExamSchema = z.object({
 })
 
 export const FormSchedule = () => {
-  const { registerSchedule } = useRegisterSchedule()
+  const form = useZodForm({
+    schema,
+  })
+  const navigate = useNavigate()
+  const dialog = useDialog()
+  const registerSchedule = useRegisterSchedule()
 
-  const handleSubmit = async (
-    data: z.infer<typeof scheduleCitizenExamSchema>
-  ) => {
-    const { date, hour } = data
-
-    const formattedData = {
-      ...data,
-      date: dayjs(date).format('YYYY-MM-DD'),
-      hour: hour.split(':')[0],
-    }
-
+  const handleSubmit = async ( data: z.infer<typeof schema>) => {
     try {
-      await registerSchedule(formattedData)
+      const { date, hour } = data
+
+      const formattedData = {
+        ...data,
+        date: dayjs(date).format('YYYY-MM-DD'),
+        hour: hour.split(':')[0],
+      }
+
+      await registerSchedule.mutateAsync(formattedData)
+
+      dialog.show({
+        title: 'Agendamento realizado com sucesso!',
+        subtitle:
+          'O agendamento foi realizado, para verificar acesse lista de agendamentos.',
+        type: 'success',
+        firstButton: {
+          label: 'Entendi',
+          onClick: () => { dialog.hide(), navigate('/schedules') },
+        }
+      })
     } catch (error) {
-      return toast.error('Ocorreu um erro no agendamento', {
+      toast.error('Ocorreu um erro no agendamento. Tente novamente', {
         theme: 'colored',
       })
     }
   }
 
   return (
-    <PageLayout>
-      <div className="flex min-h-screen items-center justify-center ">
+    <PageLayout className='flex min-h-screen items-center justify-center'>
         <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 p-6 bg-white rounded-lg shadow-lg">
           <div className="p-8">
             <h1 className="text-2xl font-bold mb-6">Agendamento do Teste</h1>
@@ -71,7 +87,7 @@ export const FormSchedule = () => {
               Preencha as informações do cidadão que será examinado e os dados
               do agendamento.
             </p>
-            <ZodForm schema={scheduleCitizenExamSchema} onSubmit={handleSubmit}>
+            <ZodForm form={form} onSubmit={handleSubmit}>
               {({ Input, DateInput, Select }) => (
                 <div className="flex flex-col gap-4">
                   <div className="space-y-2">
@@ -124,7 +140,6 @@ export const FormSchedule = () => {
             />
           </div>
         </div>
-      </div>
     </PageLayout>
   )
 }

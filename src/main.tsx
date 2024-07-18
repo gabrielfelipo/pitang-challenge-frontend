@@ -1,13 +1,12 @@
-import React from 'react'
+import { RouterProvider } from 'react-router-dom'
 import ReactDOM from 'react-dom/client'
+
 import './index.css'
-import { NextUIProvider } from '@nextui-org/react'
-import { FormSchedule } from './features/formSchedule/FormSchedule.tsx'
+import { AppProvider } from './providers'
+import { appRouter } from './routes'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <NextUIProvider>
-      <FormSchedule />
-    </NextUIProvider>
-  </React.StrictMode>
+  <AppProvider>
+    <RouterProvider router={appRouter} />
+  </AppProvider>
 )
