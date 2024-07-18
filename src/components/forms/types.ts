@@ -12,7 +12,7 @@ export interface InputProps
     | 'ref'
     | 'required'
     | 'isRequired'
-> {
+  > {
   name: string
   label: string | ReactNode
   isOptional?: boolean
