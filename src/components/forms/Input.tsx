@@ -18,7 +18,7 @@ export const Input = ({ ...props }: InputProps) => {
           color="default"
           variant="bordered"
           className="text-black"
-          classNames={{ inputWrapper: 'border-grey-300' }}
+          classNames={{ inputWrapper: 'border-grey-300 h-8' }}
           {...props}
           {...field}
           value={field.value}

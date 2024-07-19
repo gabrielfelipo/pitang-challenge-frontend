@@ -67,7 +67,7 @@ export const Dialog = NiceModal.create(
         </ModalContent>
       </Modal>
     )
-  },
+  }
 )
 
 export const useDialog = () => useModal(Dialog)
