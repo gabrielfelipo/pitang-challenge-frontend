@@ -15,8 +15,10 @@ module.exports = {
       },
     },
   },
-  plugins: [nextui({
-    defaultTheme: 'light',
-    defaultExtendTheme: 'light',
-  })],
+  plugins: [
+    nextui({
+      defaultTheme: 'light',
+      defaultExtendTheme: 'light',
+    }),
+  ],
 }
