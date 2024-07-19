@@ -40,3 +40,13 @@ export const hours = [
     label: '17:00',
   },
 ]
+
+export enum Status {
+  ATTENDED = 'ATTENDED',
+  NOT_ATTENDED = 'NOT_ATTENDED',
+}
+
+export enum Conclusion {
+  COVID = 'COVID',
+  NO_COVID = 'NO_COVID',
+}
