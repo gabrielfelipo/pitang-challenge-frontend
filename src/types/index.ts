@@ -1,7 +1,7 @@
 export type Schedule = {
   id: string
   date: Date
-  hour: Date
+  hour: string
   citizen: Citizen
   status: string
   conclusion: string

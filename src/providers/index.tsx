@@ -26,9 +26,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       <QueryClientProvider client={queryClient}>
         <AnimatePresence>
           <NextUIProvider>
-            <NiceModal.Provider>
-              {children}
-            </NiceModal.Provider>
+            <NiceModal.Provider>{children}</NiceModal.Provider>
             <ToastContainer />
           </NextUIProvider>
         </AnimatePresence>
