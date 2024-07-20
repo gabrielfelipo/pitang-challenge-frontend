@@ -74,7 +74,7 @@ export const FormSchedule = () => {
         },
       })
     } catch (error) {
-      toast.error('Ocorreu um erro no agendamento. Tente novamente', {
+      toast.error('Esse dia/hora já chegou ao limite de testes agendados.', {
         theme: 'colored',
       })
     }
@@ -90,39 +90,53 @@ export const FormSchedule = () => {
             Preencha as informações do cidadão que será examinado e os dados do
             agendamento.
           </p>
-          <ZodForm 
+          <ZodForm
             onSubmit={handleSubmit}
             schema={schema}
             defaultValues={{
-              name: localStorage.getItem('storageName') ? localStorage.getItem('storageName') : '',
-              birthDate: localStorage.getItem('storageBirthDate') ? new Date(localStorage.getItem('storageBirthDate') as unknown as Date) : undefined,
-              date: localStorage.getItem('storageDate') ? new Date(localStorage.getItem('storageDate')as unknown as Date) : undefined,
-              hour: localStorage.getItem('storageHour') ? localStorage.getItem('storageHour') : ''
+              name: localStorage.getItem('storageName')
+                ? localStorage.getItem('storageName')
+                : '',
+              birthDate: localStorage.getItem('storageBirthDate')
+                ? new Date(
+                    localStorage.getItem('storageBirthDate') as unknown as Date
+                  )
+                : undefined,
+              date: localStorage.getItem('storageDate')
+                ? new Date(
+                    localStorage.getItem('storageDate') as unknown as Date
+                  )
+                : undefined,
+              hour: localStorage.getItem('storageHour')
+                ? localStorage.getItem('storageHour')
+                : '',
             }}
           >
-            {({ Input, DateInput, Select, form: { watch }}) => {
+            {({ Input, DateInput, Select, form: { watch } }) => {
               const name = watch('name')
               const birthDate = watch('birthDate')
               const date = watch('date')
               const hour = watch('hour')
-              
+
               useEffect(() => {
+                console.log(birthDate)
                 localStorage.setItem('storageName', name)
               }, [name])
 
               useEffect(() => {
-                console.log(date)
                 localStorage.setItem('storagedDate', date)
               }, [date])
 
               useEffect(() => {
-                localStorage.setItem('storageBirthDate', birthDate)
+                console.log(birthDate)
+                if (birthDate != undefined)
+                  localStorage.setItem('storageBirthDate', birthDate)
               }, [birthDate])
 
               useEffect(() => {
                 localStorage.setItem('storageHour', hour)
               }, [hour])
-            
+
               return (
                 <div className="flex flex-col gap-4">
                   <div className="space-y-2">
@@ -134,7 +148,6 @@ export const FormSchedule = () => {
                       label=""
                       placeholder="Nome completo"
                       maxLength={24}
-
                     />
                   </div>
 
@@ -151,10 +164,7 @@ export const FormSchedule = () => {
                     <label className="block text-sm font-semibold">
                       Data do exame
                     </label>
-                    <DateInput
-                      name="date"
-                      placeholderText="Data do exame"
-                    />
+                    <DateInput name="date" placeholderText="Data do exame" />
                   </div>
                   <div className="space-y-2">
                     <label className="block text-sm font-semibold">

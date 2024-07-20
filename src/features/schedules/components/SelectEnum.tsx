@@ -31,7 +31,7 @@ export const SelectEnum = ({
       items={data}
       variant="bordered"
       placeholder="Select a status"
-      aria-label='Select from enum'
+      aria-label="Select from enum"
       classNames={{
         base: 'max-w-xs',
         trigger: 'h-6',

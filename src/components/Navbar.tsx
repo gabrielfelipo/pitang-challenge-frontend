@@ -1,4 +1,10 @@
-import { Link, Navbar as NUINavbar, NavbarBrand, NavbarContent, NavbarItem } from '@nextui-org/react'
+import {
+  Link,
+  Navbar as NUINavbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+} from '@nextui-org/react'
 import { useLocation } from 'react-router-dom'
 
 import { Image } from '~/components/Image'
@@ -7,12 +13,12 @@ export const Navbar = () => {
   const location = useLocation()
 
   return (
-    <NUINavbar isBordered >
+    <NUINavbar isBordered>
       <NavbarBrand>
         <Image
-          className='h-14 w-14 mx-4 self-center'
-          src='/public/logo-rec.png'
-          alt='Recife, Pernambuco logotipo'
+          className="h-14 w-14 mx-4 self-center"
+          src="/public/logo-rec.png"
+          alt="Recife, Pernambuco logotipo"
         />
         <p className="font-bold text-inherit">PITANG COVID</p>
       </NavbarBrand>
