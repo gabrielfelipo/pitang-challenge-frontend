@@ -1,10 +1,10 @@
-import dayjs from "dayjs"
-import {Card, CardBody} from "@nextui-org/react"
+import dayjs from 'dayjs'
+import { Card, CardBody } from '@nextui-org/react'
 
-import { Schedule } from "~/types"
-import { Conclusion, Status } from "~/constants"
+import { Schedule } from '~/types'
+import { Conclusion, Status } from '~/constants'
 import { arrayOfObjectsFromEnum } from '~/utils/arrayFromEnum'
-import { SelectEnum } from "./SelectEnum"
+import { SelectEnum } from './SelectEnum'
 
 type ScheduleCardProps = {
   schedule: Schedule
@@ -23,8 +23,13 @@ export const ScheduleCard = ({ schedule }: ScheduleCardProps) => {
             defaultValue={status}
           />
         </p>
-        <p className="flex gap-2"><p className="font-medium">Cidadão:</p> {citizen.name}</p>
-        <p className="flex gap-2"><p className="font-medium">Data de nascimento:</p> {dayjs(citizen.birthDate).format('DD/MM/YYYY')}</p>
+        <p className="flex gap-2">
+          <p className="font-medium">Cidadão:</p> {citizen.name}
+        </p>
+        <p className="flex gap-2">
+          <p className="font-medium">Data de nascimento:</p>{' '}
+          {dayjs(citizen.birthDate).format('DD/MM/YYYY')}
+        </p>
         <p className="flex gap-2">
           <p className="font-medium">Conclusão:</p>
           <SelectEnum

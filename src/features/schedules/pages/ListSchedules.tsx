@@ -59,7 +59,7 @@ export const ListSchedules: React.FC = () => {
   return (
     <PageLayout className="w-full min-h-screen px-4 py-4">
       <Navbar />
-      <h1 className='text-3xl font-semibold my-4'>Schedules</h1>
+      <h1 className="text-3xl font-semibold my-4">Schedules</h1>
       <div className="flex flex-col w-full space-y-">
         {Object.keys(schedulesByDate).map((date) => (
           <div key={date} className="w-full mb-4 space-y-2">
